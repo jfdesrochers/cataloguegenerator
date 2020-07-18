@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>Sutekina Catalogue</title>
+        <link href="app.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="loading">
+            <div>Generating PDF, please wait...</div>
+            <div class="sk-folding-cube">
+                <div class="sk-cube1 sk-cube"></div>
+                <div class="sk-cube2 sk-cube"></div>
+                <div class="sk-cube4 sk-cube"></div>
+                <div class="sk-cube3 sk-cube"></div>
+            </div>
+        </div>
+        <div id="container"></div>
+        <script src="mithril.min.js"></script>
+        <script src="jspdf.min.js"></script>
+        <script src="Montserrat-Fonts.js"></script>
+        <script src="xlsx.full.min.js"></script>
+        <script src="logos.js"></script>
+        <script src="pdfgenerator.js"></script>
+        <script src="app.js"></script>
+    </body>
+</html>
