@@ -8,7 +8,7 @@ let itemLists = []
 let itemPics = {}
 let loadingCount = -1
 let coverInfo = {
-    title: '',
+    title: localStorage.getItem('SutekinaCatalogue.Title') || '',
     pictureOrColor: [0, 0, 0],
     logoPosition: 'top'
 }
@@ -38,7 +38,6 @@ async function doGenerate() {
         loadError = 'An error occured while generating the PDF. ' + e.message
     }
     loading.classList.remove('show')
-    window.scrollTo(0, 0)
     m.redraw()
 }
 
@@ -73,7 +72,7 @@ class CatalogueLoader {
             pdfUrl = ''
         }
         coverInfo = {
-            title: '',
+            title: localStorage.getItem('SutekinaCatalogue.Title') || '',
             pictureOrColor: [0, 0, 0],
             logoPosition: 'top'
         }
@@ -180,6 +179,7 @@ class CatalogueLoader {
 
     handleTitleChange (e) {
         coverInfo.title = e.target.value
+        localStorage.setItem('SutekinaCatalogue.Title', coverInfo.title)
     }
 
     handleGenerate (e) {
@@ -192,6 +192,11 @@ class CatalogueLoader {
         let loading = document.getElementById('loading')
         loading.classList.add('show')
         setTimeout(doGenerate, 1000)
+    }
+
+    handleReload (e) {
+        e.preventDefault()
+        window.location.reload()
     }
 
     selectCoverType (e) {
@@ -209,7 +214,14 @@ class CatalogueLoader {
 
     view () {
         return [
-            m('.list-loader', [
+            m('.list-loader', pdfUrl.length > 0 ? [
+                m('.step.success', [
+                    m('h2.step-title', 'PDF successfully generated!'),
+                    m('h3.step-subtitle', 'Your PDF catalogue has been successfully generated. You can consult it on the side and download it or start over using the buttons below.'),
+                    m('a.btn.mr-15', {href: pdfUrl, download: coverInfo.title + '.pdf'}, 'Download'),
+                    m('button.btn', {onclick: this.handleReload}, 'Start over')
+                ])
+            ] : [
                 m('img.list-logo', { src: sklogo }),
                 loadError ? m('.load-error', loadError) : '',
                 m('.step', [
@@ -244,7 +256,7 @@ class CatalogueLoader {
                     ]),
                     m('p', 'Give your catalogue a title:'),
                     m('input.cover-select.full', {value: coverInfo.title, oninput: this.handleTitleChange}),
-                    m('button.generate-btn', {disabled: (coverInfo.title.length === 0 || !coverInfo.pictureOrColor), onclick: this.handleGenerate}, 'Generate PDF')
+                    m('button.btn', {disabled: (coverInfo.title.length === 0 || !coverInfo.pictureOrColor), onclick: this.handleGenerate}, 'Generate PDF')
                 ]) : ''
             ]),
             pdfUrl.length > 0 ? m('iframe.pdfdoc', {src: pdfUrl}) : ''

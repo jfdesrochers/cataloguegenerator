@@ -15,7 +15,11 @@ var URLS = [                            // Add URL you want to cache in this lis
     '/mithril.min.js',
     '/Montserrat-Fonts.js',
     '/pdfgenerator.js',
-    '/xlsx.full.min.js'
+    '/xlsx.full.min.js',
+    '/favicon.ico',
+    '/favicon-192x192.png',
+    '/favicon-512x512.png',
+    '/site.webmanifest'
 ]
 
 // Respond with cached resources

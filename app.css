@@ -40,6 +40,7 @@
 
 body {
     font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    overflow: hidden;
 }
 
 #container {
@@ -48,7 +49,10 @@ body {
 }
 
 .list-loader {
-    max-width: 800px;
+    max-width: 850px;
+    overflow: auto;
+    max-height: calc(100vh - 40px);
+    margin: 15px 0;
 }
 
 .load-error {
@@ -75,6 +79,7 @@ input {
 
 .list-logo {
     width: 240px;
+    margin-left: 15px;
 }
 
 .step-subtitle {
@@ -85,7 +90,15 @@ input {
     background-color: #f5f5fa;
     border-radius: 20px;
     padding: 20px 30px;
-    margin-top: 15px;
+    margin: 15px;
+}
+
+.step.success {
+    background-color: #f5faf5;
+}
+
+.success .step-title {
+    color: #0a0;
 }
 
 .skulist {
@@ -124,22 +137,22 @@ input {
     width: 100%;
 }
 
-.generate-btn:hover {
+.btn:hover {
     background-color: #e8e8f3;
 }
 
-.generate-btn:active {
+.btn:active {
     background-color: #8484a9;
     color: #ffffff;
 }
 
-.generate-btn:disabled {
+.btn:disabled {
     background-color: transparent;
     border: solid 1px #d5d5e6;
     cursor: not-allowed;
 }
 
-.generate-btn {
+.btn {
     margin-top: 15px;
     padding: 10px 15px;
     border: none;
@@ -148,7 +161,31 @@ input {
     border: solid 1px transparent;
     font-family: inherit;
     font-weight: bold;
+    font-size: 1rem;
+    color: #000000;
+    text-decoration: none;
+    cursor: default;
     outline: 0;
+}
+
+.success .btn {
+    background-color: #d5e6d5;
+}
+
+.success .btn:disabled {
+    border: solid 1px #d5e6d5;
+}
+
+.success .btn:hover {
+    background-color: #e8f3e8;
+}
+
+.success .btn:active {
+    background-color: #84a984;
+}
+
+.mr-15 {
+    margin-right: 15px;
 }
 
 #loading {
