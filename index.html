@@ -3,7 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <title>Sutekina Catalogue</title>
+        <title>Sutekina Catalogue Generator</title>
+        <link rel="canonical" href="https://sutekina.desrochers.dev/">
+        <link rel="manifest" href="site.webmanifest">
+        <link rel="shortcut icon" href="favicon.ico">
         <link href="app.css" rel="stylesheet">
     </head>
     <body>
@@ -17,6 +20,11 @@
             </div>
         </div>
         <div id="container"></div>
+        <script>
+            if (navigator.serviceWorker) {
+                navigator.serviceWorker.register('/sw.js', {scope: '/'})
+            }
+        </script>
         <script src="mithril.min.js"></script>
         <script src="jspdf.min.js"></script>
         <script src="Montserrat-Fonts.js"></script>
