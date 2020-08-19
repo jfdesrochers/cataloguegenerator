@@ -85,24 +85,26 @@ class CatalogueLoader {
                 const sheet = book.Sheets['Retail Sheet']
                 // Ensure the file has correct data
                 if (!sheet) {
+                    console.error('Expected a Retail Sheet but not found. Sheets in this file:', book.Sheets)
                     loadError = 'This file needs to have a "Retail Sheet".'
                     m.redraw()
                     return
                 }
                 if (!sheet['!ref']) {
+                    console.error('Found a Retail Sheet, but it did not have any content. Sheets in this file:', book.Sheets)
                     loadError = 'This file needs to have a "Retail Sheet" that is not empty.'
                     m.redraw()
                     return
                 }
                 if (!sheet['A1'].c || sheet['A1'].c[0].t !== version) {
-                    loadError = `The version of this file is wrong. Expected ${version}.`
+                    loadError = `The version of this file is wrong. Expected ${version}, found ${sheet['A1'].c ? sheet['A1'].c[0].t : 'None'}.`
                     m.redraw()
                     return
                 }
 
                 const range = xlsx.utils.decode_range(book.Sheets['Retail Sheet']['!ref'])
                 itemLists = []
-                for (let i = 1; i < range.e.r; i++) {
+                for (let i = 1; i <= range.e.r; i++) {
                     let idx = String(i + 1)
                     if (!sheet['A' + idx]) continue
                     let setsku = sheet['E' + idx] ? sheet['E' + idx].v : undefined
