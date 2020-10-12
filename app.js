@@ -35,6 +35,7 @@ async function doGenerate() {
     try {
         pdfUrl = await generatePDF(itemLists, coverInfo)
     } catch (e) {
+        console.error(e)
         loadError = 'An error occured while generating the PDF. ' + e.message
     }
     loading.classList.remove('show')

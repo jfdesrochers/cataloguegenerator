@@ -112,7 +112,7 @@
             await img.decode()
         } catch (e) {
             console.error(e, item.picture)
-            throw new Error(`Could not decode image file ${item.picture.name}.`)
+            //throw new Error(`Could not decode image file ${item.picture.name}.`)
         }
         const scaleRatio = Math.max(img.width, img.height) / Math.min(img.width, img.height)
         if (img.height > img.width) {
